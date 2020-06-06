@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.3.70"
+    `maven-publish`
 }
 
 group = "com.salakheev"
@@ -21,5 +22,13 @@ tasks {
     }
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
+    }
+}
+
+configure<PublishingExtension> {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
     }
 }
