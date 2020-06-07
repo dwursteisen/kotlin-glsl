@@ -1,5 +1,8 @@
+import java.util.*
+
 plugins {
     kotlin("jvm") version "1.3.70"
+    id("com.jfrog.bintray") version "1.8.5"
     `maven-publish`
 }
 
@@ -31,4 +34,31 @@ configure<PublishingExtension> {
             from(components["java"])
         }
     }
+}
+
+val properties = Properties()
+if (project.file("local.properties").exists()) {
+    properties.load(project.file("local.properties").inputStream())
+}
+
+
+configure<com.jfrog.bintray.gradle.BintrayExtension> {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.key")
+    publish = true
+    setPublications("maven")
+    pkg(delegateClosureOf<com.jfrog.bintray.gradle.BintrayExtension.PackageConfig> {
+        repo = "minigdx"
+        name = project.name
+        githubRepo = "dwursteisen/kotlin-glsl.git"
+        vcsUrl = "https://github.com/dwursteisen/kotlin-glsl.git"
+        description = project.description
+        setLabels("java")
+        setLicenses("MIT")
+        desc = description
+        version(closureOf<com.jfrog.bintray.gradle.BintrayExtension.VersionConfig> {
+            this.name = project.version.toString()
+            released = Date().toString()
+        })
+    })
 }

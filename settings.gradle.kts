@@ -1,3 +1,3 @@
-rootProject.name = "KotlinGlsl"
+rootProject.name = "kotlin-glsl"
 include("ProgramExample")
 
