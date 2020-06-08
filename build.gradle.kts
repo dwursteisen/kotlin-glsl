@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.salakheev"
-version = "1.0"
+version = "1.1"
 
 repositories {
     jcenter()
@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     implementation("com.x5dev:chunk-templates:3.3.1")
+    implementation("org.reflections:reflections:0.9.12")
     implementation(kotlin("stdlib"))
 }
 
