@@ -18,6 +18,8 @@ dependencies {
     implementation("com.x5dev:chunk-templates:3.3.1")
     implementation("org.reflections:reflections:0.9.12")
     implementation(kotlin("stdlib"))
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
 }
 
 tasks {
@@ -26,6 +28,13 @@ tasks {
     }
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
+    }
+}
+
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
     }
 }
 
